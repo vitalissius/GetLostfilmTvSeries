@@ -181,6 +181,24 @@ struct Row
   }
 };
 
+std::string& trim(std::string& str)
+{
+  while (std::isspace(str.front(), locRUtf8)) str.erase(str.begin());
+  while (std::isspace(str.back(), locRUtf8)) str.erase(--str.end());
+  return str;
+}
+
+std::string& changeAmpersand(std::string& str)
+{
+  std::string::size_type pos = str.find("&");
+  while (pos != std::string::npos)
+  {
+    str.insert(pos + 1, "amp;");
+    pos = str.find("&", pos + 4);
+  }
+  return str;
+}
+
 std::unique_ptr<std::vector<std::string>> tokenizeString(const std::string& str, bool toUpperFirstLetter = false)
 {
   std::unique_ptr<std::vector<std::string>> pvs = std::make_unique<std::vector<std::string>>();
@@ -189,21 +207,22 @@ std::unique_ptr<std::vector<std::string>> tokenizeString(const std::string& str,
   strcpy_s(cstr, str.size() + 1, str.data());
   char* token = nullptr;
   char* next_token = nullptr;
-  char seps[] = " ,/.";
+  char seps[] = ",/.";
   token = strtok_s(cstr, seps, &next_token);
   while (token != nullptr)
   {
     if (token != nullptr)
     {
+      std::string strToken = token;
       if (toUpperFirstLetter)
       {
-        std::wstring wstrTmp = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(token);
+        std::wstring wstrTmp = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(trim(strToken));
         std::use_facet<std::ctype<wchar_t>>(locRUtf8).toupper(&wstrTmp[0], &wstrTmp[0] + 1);
         pvs->push_back(std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(wstrTmp));
       }
       else
       {
-        pvs->push_back(token);
+        pvs->push_back(trim(strToken));
       }
       token = strtok_s(nullptr, seps, &next_token);
     }
@@ -211,19 +230,6 @@ std::unique_ptr<std::vector<std::string>> tokenizeString(const std::string& str,
   delete[] cstr;
 
   return pvs;
-}
-
-std::string& replAndTrim(std::string& str) // Trim string in front (if necessary), and adding 'amp;' after '&' (if necessary);
-{
-  while (std::isspace(str.front(), locRUtf8)) str.erase(str.begin());
-
-  std::string::size_type pos = str.find("&");
-  while (pos != std::string::npos)
-  {
-    str.insert(pos + 1, "amp;");
-    pos = str.find("&", pos + 4);
-  }
-  return str;
 }
 
 struct GenresAndCountries {
@@ -240,8 +246,10 @@ void makeXmlFullData(const std::list<Row>& listRows, const std::shared_ptr<Genre
     out << "<tvseries>\n";
     for (auto lr : listRows)
     {
-      out << "\t<tvs name=\"" << replAndTrim(lr._engName) << "\" locname=\"" << lr._locName << "\" year=\"" << lr._releaseYear << "\">\n";
-      out << "\t\t<info amount=\"" << lr._seasonsAmount << "\" status=\"" << lr._status << "\" path=\"" << lr._path << "\" />\n";
+      out << "\t<tvs name=\"" << trim(changeAmpersand(lr._engName)) 
+          << "\" locname=\"" << lr._locName << "\" year=\"" << lr._releaseYear << "\">\n";
+      out << "\t\t<info amount=\"" << lr._seasonsAmount << "\" status=\"" << lr._status 
+          << "\" path=\"" << lr._path << "\"/>\n";
       
       out << "\t\t<genres>\n";
       std::unique_ptr<std::vector<std::string>> pvs = tokenizeString(lr._genre, true);

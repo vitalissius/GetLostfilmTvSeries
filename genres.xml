@@ -8,20 +8,21 @@
 	<genre>Вестерн</genre>
 	<genre>Военный</genre>
 	<genre>Детектив</genre>
-	<genre>Документальный</genre>
+	<genre>Документальный фильм</genre>
 	<genre>Драма</genre>
-	<genre>Историческая</genre>
+	<genre>Историческая драма</genre>
 	<genre>Исторический</genre>
 	<genre>История</genre>
 	<genre>Комедия</genre>
-	<genre>Космическая</genre>
+	<genre>Космическая фантастика</genre>
 	<genre>Криминал</genre>
 	<genre>Криминальный</genre>
 	<genre>Мелодрама</genre>
 	<genre>Минисериал</genre>
 	<genre>Мистика</genre>
+	<genre>Мистика триллер</genre>
 	<genre>Мультфильм</genre>
-	<genre>Научная</genre>
+	<genre>Научная фантастика</genre>
 	<genre>Постапокалиптика</genre>
 	<genre>Приключения</genre>
 	<genre>Семейный</genre>
@@ -29,9 +30,8 @@
 	<genre>Триллер</genre>
 	<genre>Ужасы</genre>
 	<genre>Фантастика</genre>
-	<genre>Фильм</genre>
 	<genre>Фэнтези</genre>
-	<genre>Шпионский</genre>
+	<genre>Шпионский боевик</genre>
 	<genre>Экшен</genre>
 	<genre>Экшн</genre>
 </genres>
