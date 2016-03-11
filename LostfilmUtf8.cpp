@@ -131,6 +131,7 @@ std::shared_ptr<std::stringstream> downloadFunction(const std::string& host, con
   {
     std::cout << e.what() << std::endl;
   }
+  return std::make_shared<std::stringstream>();
 }
 
 
