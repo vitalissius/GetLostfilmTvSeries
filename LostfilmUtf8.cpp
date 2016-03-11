@@ -10,6 +10,9 @@
 #include <functional>
 #include <codecvt>
 
+#include <io.h>                           // _O_U8TEXT
+#include <fcntl.h>                        // _setmode
+
 #include <boost/asio.hpp>
 
 #ifdef _MSC_VER
@@ -193,9 +196,9 @@ std::unique_ptr<std::vector<std::string>> tokenizeString(const std::string& str,
     {
       if (toUpperFirstLetter)
       {
-        static std::locale loc("");
-        std::use_facet<std::ctype<char>>(loc).toupper(token, token + 1);
-        pvs->push_back(token);
+        std::wstring wstrTmp = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(token);
+        std::use_facet<std::ctype<wchar_t>>(locRUtf8).toupper(&wstrTmp[0], &wstrTmp[0] + 1);
+        pvs->push_back(std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(wstrTmp));
       }
       else
       {
@@ -211,8 +214,7 @@ std::unique_ptr<std::vector<std::string>> tokenizeString(const std::string& str,
 
 std::string& replAndTrim(std::string& str) // Trim string in front (if necessary), and adding 'amp;' after '&' (if necessary);
 {
-  static std::locale loc("");
-  while (std::isspace(str.front(), loc)) str.erase(str.begin());
+  while (std::isspace(str.front(), locRUtf8)) str.erase(str.begin());
 
   std::string::size_type pos = str.find("&");
   while (pos != std::string::npos)
@@ -233,7 +235,7 @@ void makeXmlFullData(const std::list<Row>& listRows, const std::shared_ptr<Genre
   std::ofstream out("tvseries.xml", std::ios::out | std::ios::trunc);
   if (out.is_open())
   {
-    out << "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n\n";
+    out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n";
     out << "<tvseries>\n";
     for (auto lr : listRows)
     {
@@ -270,7 +272,7 @@ void makeXmlGenresAndCountries(const std::shared_ptr<GenresAndCountries> gac)
   std::ofstream out("genres.xml");
   if (out.is_open())
   {
-    out << "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n\n";
+    out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n";
     out << "<genres>";
     out << "\n";
 
@@ -287,7 +289,7 @@ void makeXmlGenresAndCountries(const std::shared_ptr<GenresAndCountries> gac)
   out.open("countries.xml");
   if (out.is_open())
   {
-    out << "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n\n";
+    out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n";
     out << "<countries>";
     out << "\n";
 
@@ -304,9 +306,12 @@ void makeXmlGenresAndCountries(const std::shared_ptr<GenresAndCountries> gac)
 
 int main()
 {
-  setlocale(0, ".1251");
+//  setlocale(0, ".1251");
 //   std::cin.get();
 //   std::cin.clear();
+  //std::cout.imbue(locRUtf8);
+  //_setmode(_fileno(stdout), _O_TEXT);
+
 
   try
   {
@@ -323,10 +328,10 @@ int main()
       std::getline(*streamFullList, line);
 
       static bool found = false;
-      if (!found && (line.find("<!-- ### Полный список сериалов -->") != std::string::npos)) found = true;
+      if (!found && (line.find("<!-- ### РџРѕР»РЅС‹Р№ СЃРїРёСЃРѕРє СЃРµСЂРёР°Р»РѕРІ -->") != std::string::npos)) found = true;
       if (found)
       {
-        if (line.find("<!-- ### Текстовая информация -->") != std::string::npos) break;
+        if (line.find("<!-- ### РўРµРєСЃС‚РѕРІР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ -->") != std::string::npos) break;
         std::smatch sm;
 
         std::string path;
@@ -359,7 +364,7 @@ int main()
 //       std::cout << "url: " << std::get<0>(l) << ", loc: " << std::get<1>(l) << ", eng: " << std::get<2>(l) << std::endl;
 //     }
 
-
+    _setmode(_fileno(stdout), _O_U8TEXT);
     for (auto tuple : listTupleBegin)
     {
       std::shared_ptr<std::stringstream> stream = downloadFunction("www.lostfilm.tv", std::get<0>(tuple));
@@ -375,34 +380,39 @@ int main()
         std::string amount;
         std::string status;
         
-        if (line.find("Страна:") != std::string::npos)
+        if (line.find("РЎС‚СЂР°РЅР°:") != std::string::npos)
         {
           std::smatch sm;
-          std::regex_search(line, sm, std::regex("Страна: (.*)<br />"));
+          std::regex_search(line, sm, std::regex("РЎС‚СЂР°РЅР°: (.*)<br />"));
           country = sm[1];
           
           std::getline(*stream, line);
-          std::regex_search(line, sm, std::regex("Год выхода: <span>(.*)</span><br />"));
+          std::regex_search(line, sm, std::regex("Р“РѕРґ РІС‹С…РѕРґР°: <span>(.*)</span><br />"));
           year = sm[1];
           
           std::getline(*stream, line);
-          std::regex_search(line, sm, std::regex("Жанр: <span>(.*)</span><br />"));
+          std::regex_search(line, sm, std::regex("Р–Р°РЅСЂ: <span>(.*)</span><br />"));
           genre = sm[1];
 
           std::getline(*stream, line);
-          std::regex_search(line, sm, std::regex("Количество сезонов: <span>(.*)</span><br />"));
+          std::regex_search(line, sm, std::regex("РљРѕР»РёС‡РµСЃС‚РІРѕ СЃРµР·РѕРЅРѕРІ: <span>(.*)</span><br />"));
           amount = sm[1];
 
           std::getline(*stream, line);
-          std::regex_search(line, sm, std::regex("Статус: (.*)<br />"));
+          std::regex_search(line, sm, std::regex("РЎС‚Р°С‚СѓСЃ: (.*)<br />"));
           status = sm[1];
 
           listRowAll.emplace_back(std::get<0>(tuple), std::get<1>(tuple), std::get<2>(tuple), country, year, genre, amount, status);
         }
         continue;
       }
-      std::cout << "Given an info about " << std::get<2>(tuple) << std::endl;
+      static int counter = 0;
+      //std::cout << "Given an info about <" << ++counter << "> " << std::get<1>(tuple) << std::endl;
+      std::wstring strTmp = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(std::get<1>(tuple));
+      std::wcout << "Given an info about <" << ++counter << "> " << strTmp << std::endl;
+      //MessageBox(nullptr, strTmp.data(), nullptr, MB_OK);
     }
+    _setmode(_fileno(stdout), _O_TEXT);
 
 
     for (auto r : listRowAll)

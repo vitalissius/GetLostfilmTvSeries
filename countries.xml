@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="windows-1251"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <countries>
-	<country>Австралия</country>
-	<country>Англия</country>
-	<country>Бельгия</country>
-	<country>Великобритания</country>
-	<country>Германия</country>
-	<country>Ирландия</country>
-	<country>Канада</country>
-	<country>США</country>
-	<country>Франция</country>
-	<country>Швейцария</country>
-	<country>Япония</country>
+	<country>РђРІСЃС‚СЂР°Р»РёСЏ</country>
+	<country>РђРЅРіР»РёСЏ</country>
+	<country>Р‘РµР»СЊРіРёСЏ</country>
+	<country>Р’РµР»РёРєРѕР±СЂРёС‚Р°РЅРёСЏ</country>
+	<country>Р“РµСЂРјР°РЅРёСЏ</country>
+	<country>РСЂР»Р°РЅРґРёСЏ</country>
+	<country>РљР°РЅР°РґР°</country>
+	<country>РЎРЁРђ</country>
+	<country>Р¤СЂР°РЅС†РёСЏ</country>
+	<country>РЁРІРµР№С†Р°СЂРёСЏ</country>
+	<country>РЇРїРѕРЅРёСЏ</country>
 </countries>
