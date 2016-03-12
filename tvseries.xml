@@ -345,6 +345,15 @@
 		<countries>
 		</countries>
 	</tvs>
+	<tvs name="War &amp; Peace" locname="Война и мир" year="2016">
+		<info amount="1" status="закончен" path="/browse.php?cat=274"/>
+		<genres>
+			<genre>Драма</genre>
+		</genres>
+		<countries>
+			<country>Великобритания</country>
+		</countries>
+	</tvs>
 	<tvs name="The Magicians" locname="Волшебники" year="2015">
 		<info amount="1" status="снимается" path="/browse.php?cat=264"/>
 		<genres>
