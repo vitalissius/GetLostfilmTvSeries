@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <countries>
-	<country>Австралия</country>
-	<country>Англия</country>
-	<country>Бельгия</country>
-	<country>Великобритания</country>
-	<country>Германия</country>
-	<country>Ирландия</country>
-	<country>Канада</country>
-	<country>США</country>
-	<country>Франция</country>
-	<country>Швейцария</country>
-	<country>Япония</country>
+  <country>Австралия</country>
+  <country>Англия</country>
+  <country>Бельгия</country>
+  <country>Великобритания</country>
+  <country>Германия</country>
+  <country>Ирландия</country>
+  <country>Канада</country>
+  <country>США</country>
+  <country>Франция</country>
+  <country>Швейцария</country>
+  <country>Япония</country>
 </countries>

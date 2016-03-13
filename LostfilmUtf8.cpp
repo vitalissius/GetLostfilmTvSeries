@@ -246,30 +246,30 @@ void makeXmlFullData(const std::list<Row>& listRows, const std::shared_ptr<Genre
     out << "<tvseries>\n";
     for (auto lr : listRows)
     {
-      out << "\t<tvs name=\"" << trim(changeAmpersand(lr._engName)) 
+      out << "  <tvs name=\"" << trim(changeAmpersand(lr._engName)) 
           << "\" locname=\"" << lr._locName << "\" year=\"" << lr._releaseYear << "\">\n";
-      out << "\t\t<info amount=\"" << lr._seasonsAmount << "\" status=\"" << lr._status 
+      out << "    <info amount=\"" << lr._seasonsAmount << "\" status=\"" << lr._status 
           << "\" path=\"" << lr._path << "\"/>\n";
       
-      out << "\t\t<genres>\n";
+      out << "    <genres>\n";
       std::unique_ptr<std::vector<std::string>> pvs = tokenizeString(lr._genre, true);
       for (auto s : *pvs)
       {
         if (gacIfNecessary) gacIfNecessary->_genres.insert(s);
-        out << "\t\t\t<genre>" << s << "</genre>\n";
+        out << "      <genre>" << s << "</genre>\n";
       }
-      out << "\t\t</genres>\n";
+      out << "    </genres>\n";
 
-      out << "\t\t<countries>\n";
+      out << "    <countries>\n";
       pvs = tokenizeString(lr._country);
       for (auto s : *pvs)
       {
         if (gacIfNecessary) gacIfNecessary->_countries.insert(s);
-        out << "\t\t\t<country>" << s << "</country>\n";
+        out << "      <country>" << s << "</country>\n";
       }
-      out << "\t\t</countries>\n";
+      out << "    </countries>\n";
 
-      out << "\t</tvs>\n";
+      out << "  </tvs>\n";
     }
     out << "</tvseries>\n";
     out.close();
@@ -287,7 +287,7 @@ void makeXmlGenresAndCountries(const std::shared_ptr<GenresAndCountries> gac)
 
     for (auto s : gac->_genres)
     {
-      out << "\t<genre>" << s << "</genre>\n";
+      out << "  <genre>" << s << "</genre>\n";
     }
 
     out << "</genres>";
@@ -304,7 +304,7 @@ void makeXmlGenresAndCountries(const std::shared_ptr<GenresAndCountries> gac)
 
     for (auto s : gac->_countries)
     {
-      out << "\t<country>" << s << "</country>\n";
+      out << "  <country>" << s << "</country>\n";
     }
 
     out << "</countries>";
