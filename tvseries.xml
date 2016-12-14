@@ -2,7 +2,7 @@
 
 <tvseries>
   <tvs name="11.22.63" locname="11.22.63" year="2016">
-    <info amount="1" status="снимается" path="/browse.php?cat=272"/>
+    <info amount="1" status="закончен" path="/browse.php?cat=272"/>
     <genres>
       <genre>Фантастика</genre>
       <genre>Триллер</genre>
@@ -13,7 +13,7 @@
     </countries>
   </tvs>
   <tvs name="12 Monkeys" locname="12 обезьян" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=236"/>
+    <info amount="2" status="снимается" path="/browse.php?cat=236"/>
     <genres>
       <genre>Фантастика</genre>
       <genre>Триллер</genre>
@@ -53,7 +53,7 @@
     </countries>
   </tvs>
   <tvs name="Agent Carter" locname="Агент Картер" year="2015">
-    <info amount="2" status="снимается" path="/browse.php?cat=235"/>
+    <info amount="2" status="закончен" path="/browse.php?cat=235"/>
     <genres>
       <genre>Шпионский боевик</genre>
       <genre>Фантастика</genre>
@@ -64,7 +64,7 @@
     </countries>
   </tvs>
   <tvs name="Marvel's Agents of S.H.I.E.L.D." locname="Агенты Щ.И.Т." year="2013">
-    <info amount="3" status="снимается" path="/browse.php?cat=190"/>
+    <info amount="4" status="снимается" path="/browse.php?cat=190"/>
     <genres>
       <genre>Фантастика</genre>
       <genre>Боевик</genre>
@@ -75,7 +75,7 @@
     </countries>
   </tvs>
   <tvs name="Hell on Wheels" locname="Ад на колесах" year="2011">
-    <info amount="5" status="снимается" path="/browse.php?cat=162"/>
+    <info amount="5" status="закончен" path="/browse.php?cat=162"/>
     <genres>
       <genre>Драма</genre>
       <genre>Вестерн</genre>
@@ -121,7 +121,7 @@
     </countries>
   </tvs>
   <tvs name="American Horror Story" locname="Американская история ужасов" year="2011">
-    <info amount="5" status="снимается" path="/browse.php?cat=157"/>
+    <info amount="6" status="снимается" path="/browse.php?cat=157"/>
     <genres>
       <genre>Драма</genre>
       <genre>Ужасы</genre>
@@ -132,7 +132,7 @@
     </countries>
   </tvs>
   <tvs name="Modern Family" locname="Американская семейка" year="2009">
-    <info amount="7" status="снимается" path="/browse.php?cat=110"/>
+    <info amount="8" status="снимается" path="/browse.php?cat=110"/>
     <genres>
       <genre>Комедия</genre>
     </genres>
@@ -152,7 +152,7 @@
     </countries>
   </tvs>
   <tvs name="Narcos" locname="Барыги" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=254"/>
+    <info amount="2" status="снимается" path="/browse.php?cat=254"/>
     <genres>
       <genre>Криминал</genre>
       <genre>Драма</genre>
@@ -171,8 +171,20 @@
       <country>США</country>
     </countries>
   </tvs>
+  <tvs name="BrainDead" locname="Безмозглые" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=282"/>
+    <genres>
+      <genre>Ужасы</genre>
+      <genre>Фантастика</genre>
+      <genre>Драма</genre>
+      <genre>Комедия</genre>
+    </genres>
+    <countries>
+      <country>США</country>
+    </countries>
+  </tvs>
   <tvs name="The Librarians" locname="Библиотекари" year="2014">
-    <info amount="2" status="снимается" path="/browse.php?cat=233"/>
+    <info amount="3" status="снимается" path="/browse.php?cat=233"/>
     <genres>
       <genre>Приключения</genre>
     </genres>
@@ -181,7 +193,7 @@
     </countries>
   </tvs>
   <tvs name="Fear the Walking Dead" locname="Бойтесь ходячих мертвецов" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=252"/>
+    <info amount="2" status="снимается" path="/browse.php?cat=252"/>
     <genres>
       <genre>Ужасы</genre>
       <genre>Драма</genre>
@@ -199,7 +211,7 @@
     </countries>
   </tvs>
   <tvs name="Penny Dreadful" locname="Бульварные ужасы" year="2014">
-    <info amount="2" status="снимается" path="/browse.php?cat=210"/>
+    <info amount="3" status="закончен" path="/browse.php?cat=210"/>
     <genres>
       <genre>Ужасы</genre>
       <genre>Драма</genre>
@@ -234,7 +246,7 @@
     </countries>
   </tvs>
   <tvs name="It's Always Sunny in Philadelphia" locname="В Филадельфии всегда солнечно" year="2005">
-    <info amount="10" status="снимается" path="/browse.php?cat=125"/>
+    <info amount="11" status="снимается" path="/browse.php?cat=125"/>
     <genres>
       <genre>Ситком</genre>
     </genres>
@@ -258,6 +270,17 @@
     <info amount="1" status="закончен" path="/browse.php?cat=73"/>
     <genres>
       <genre>Фантастика</genre>
+    </genres>
+    <countries>
+      <country>США</country>
+    </countries>
+  </tvs>
+  <tvs name="Van Helsing" locname="Ван Хельсинг" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=289"/>
+    <genres>
+      <genre>Фэнтези</genre>
+      <genre>Боевик</genre>
+      <genre>Драма</genre>
     </genres>
     <countries>
       <country>США</country>
@@ -313,6 +336,18 @@
     <countries>
       <country>Канада</country>
       <country>Ирландия</country>
+    </countries>
+  </tvs>
+  <tvs name="Timeless" locname="Вне времени" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=291"/>
+    <genres>
+      <genre>Фантастика</genre>
+      <genre>Боевик</genre>
+      <genre>Драма</genre>
+      <genre>Приключения</genre>
+    </genres>
+    <countries>
+      <country>США</country>
     </countries>
   </tvs>
   <tvs name="Breaking Bad" locname="Во все тяжкие" year="2008">
@@ -407,7 +442,7 @@
     </countries>
   </tvs>
   <tvs name="Heroes Reborn" locname="Герои: Возрождение" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=253"/>
+    <info amount="1" status="закончен" path="/browse.php?cat=253"/>
     <genres>
       <genre>Фэнтези</genre>
     </genres>
@@ -447,7 +482,7 @@
     </countries>
   </tvs>
   <tvs name="Gotham" locname="Готэм" year="2014">
-    <info amount="2" status="снимается" path="/browse.php?cat=225"/>
+    <info amount="3" status="снимается" path="/browse.php?cat=225"/>
     <genres>
       <genre>Триллер</genre>
       <genre>Драма</genre>
@@ -533,7 +568,7 @@
     </countries>
   </tvs>
   <tvs name="Jonathan Strange &amp; Mr Norrell" locname="Джонатан Стрендж и мистер Норрелл" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=250"/>
+    <info amount="1" status="закончен" path="/browse.php?cat=250"/>
     <genres>
       <genre>Фэнтези</genre>
       <genre>История</genre>
@@ -543,7 +578,7 @@
     </countries>
   </tvs>
   <tvs name="The Vampire Diaries" locname="Дневники вампира" year="2009">
-    <info amount="7" status="снимается" path="/browse.php?cat=114"/>
+    <info amount="8" status="снимается" path="/browse.php?cat=114"/>
     <genres>
       <genre>Драма</genre>
       <genre>Ужасы</genre>
@@ -672,8 +707,19 @@
       <country>США</country>
     </countries>
   </tvs>
+  <tvs name="Stranger Things" locname="Загадочные события" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=286"/>
+    <genres>
+      <genre>Ужасы</genre>
+      <genre>Триллер</genre>
+      <genre>Драма</genre>
+    </genres>
+    <countries>
+      <country>США</country>
+    </countries>
+  </tvs>
   <tvs name="A Young Doctor's Notebook" locname="Записки юного врача" year="2012">
-    <info amount="2" status="снимается" path="/browse.php?cat=179"/>
+    <info amount="2" status="закончен" path="/browse.php?cat=179"/>
     <genres>
       <genre>Комедия</genre>
     </genres>
@@ -704,7 +750,7 @@
     </countries>
   </tvs>
   <tvs name="Star Wars Rebels" locname="Звёздные войны: Повстанцы" year="2014">
-    <info amount="2" status="снимается" path="/browse.php?cat=228"/>
+    <info amount="3" status="снимается" path="/browse.php?cat=228"/>
     <genres>
       <genre>Мультфильм</genre>
       <genre>Фантастика</genre>
@@ -820,7 +866,7 @@
     </countries>
   </tvs>
   <tvs name="And Then There Were None" locname="И никого не стало" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=265"/>
+    <info amount="1" status="закончен" path="/browse.php?cat=265"/>
     <genres>
       <genre>Триллер</genre>
       <genre>Драма</genre>
@@ -832,7 +878,7 @@
     </countries>
   </tvs>
   <tvs name="Game of Thrones" locname="Игра престолов" year="2011">
-    <info amount="5" status="снимается" path="/browse.php?cat=145"/>
+    <info amount="6" status="снимается" path="/browse.php?cat=145"/>
     <genres>
       <genre>Драма</genre>
       <genre>Фэнтези</genre>
@@ -869,6 +915,16 @@
     </genres>
     <countries>
       <country>Великобритания</country>
+    </countries>
+  </tvs>
+  <tvs name="Outcast" locname="Изгой" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=281"/>
+    <genres>
+      <genre>Ужасы</genre>
+      <genre>Драма</genre>
+    </genres>
+    <countries>
+      <country>США</country>
     </countries>
   </tvs>
   <tvs name="Intelligence" locname="Искусственный интеллект" year="2014">
@@ -912,7 +968,7 @@
     </countries>
   </tvs>
   <tvs name="Castle" locname="Касл" year="2009">
-    <info amount="8" status="снимается" path="/browse.php?cat=129"/>
+    <info amount="8" status="закончен" path="/browse.php?cat=129"/>
     <genres>
       <genre>Детектив</genre>
       <genre>Драма</genre>
@@ -935,7 +991,7 @@
     </countries>
   </tvs>
   <tvs name="Killjoys" locname="Киллджойс" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=248"/>
+    <info amount="2" status="снимается" path="/browse.php?cat=248"/>
     <genres>
       <genre>Фантастика</genre>
     </genres>
@@ -964,7 +1020,7 @@
     </countries>
   </tvs>
   <tvs name="Devious Maids" locname="Коварные горничные" year="2013">
-    <info amount="3" status="снимается" path="/browse.php?cat=230"/>
+    <info amount="4" status="закончен" path="/browse.php?cat=230"/>
     <genres>
       <genre>Комедия</genre>
       <genre>Драма</genre>
@@ -992,7 +1048,7 @@
     </countries>
   </tvs>
   <tvs name="Childhood's End" locname="Конец детства" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=261"/>
+    <info amount="1" status="закончен" path="/browse.php?cat=261"/>
     <genres>
       <genre>Фантастика</genre>
       <genre>Триллер</genre>
@@ -1031,6 +1087,27 @@
     <countries>
       <country>США</country>
       <country>Канада</country>
+    </countries>
+  </tvs>
+  <tvs name="Queen of the South" locname="Королева юга" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=284"/>
+    <genres>
+      <genre>Боевик</genre>
+      <genre>Триллер</genre>
+      <genre>Драма</genre>
+    </genres>
+    <countries>
+      <country>США</country>
+    </countries>
+  </tvs>
+  <tvs name="Incorporated" locname="Корпорация" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=295"/>
+    <genres>
+      <genre>Фантастика</genre>
+      <genre>Триллер</genre>
+    </genres>
+    <countries>
+      <country>США</country>
     </countries>
   </tvs>
   <tvs name="Space Rangers" locname="Космические рейнджеры" year="1993">
@@ -1079,7 +1156,7 @@
     </countries>
   </tvs>
   <tvs name="Beauty and the Beast" locname="Красавица и чудовище" year="2012">
-    <info amount="3" status="снимается" path="/browse.php?cat=178"/>
+    <info amount="4" status="закончен" path="/browse.php?cat=178"/>
     <genres>
       <genre>Детектив</genre>
       <genre>Мелодрама</genre>
@@ -1089,7 +1166,7 @@
     </countries>
   </tvs>
   <tvs name="Scream" locname="Крик" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=251"/>
+    <info amount="2" status="снимается" path="/browse.php?cat=251"/>
     <genres>
       <genre>Ужасы</genre>
       <genre>Криминал</genre>
@@ -1130,7 +1207,7 @@
     </countries>
   </tvs>
   <tvs name="DC's Legends of Tomorrow" locname="Легенды завтрашнего дня" year="2016">
-    <info amount="1" status="снимается" path="/browse.php?cat=269"/>
+    <info amount="2" status="снимается" path="/browse.php?cat=269"/>
     <genres>
       <genre>Фантастика</genre>
       <genre>Боевик</genre>
@@ -1140,7 +1217,7 @@
     </countries>
   </tvs>
   <tvs name="Vixen" locname="Лисица" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=257"/>
+    <info amount="2" status="снимается" path="/browse.php?cat=257"/>
     <genres>
       <genre>Мультфильм</genre>
       <genre>Боевик</genre>
@@ -1161,7 +1238,7 @@
     </countries>
   </tvs>
   <tvs name="Humans" locname="Люди" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=247"/>
+    <info amount="2" status="снимается" path="/browse.php?cat=247"/>
     <genres>
       <genre>Фантастика</genre>
       <genre>Драма</genre>
@@ -1193,6 +1270,39 @@
       <country>США</country>
     </countries>
   </tvs>
+  <tvs name="Marvel's Luke Cage" locname="Люк Кейдж" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=290"/>
+    <genres>
+      <genre>Фантастика</genre>
+      <genre>Боевик</genre>
+      <genre>Триллер</genre>
+    </genres>
+    <countries>
+      <country>США</country>
+    </countries>
+  </tvs>
+  <tvs name="Lucifer" locname="Люцифер" year="2016">
+    <info amount="2" status="снимается" path="/browse.php?cat=279"/>
+    <genres>
+      <genre>Фэнтези</genre>
+      <genre>Драма</genre>
+      <genre>Криминал</genre>
+    </genres>
+    <countries>
+      <country>США</country>
+    </countries>
+  </tvs>
+  <tvs name="Marco Polo" locname="Марко Поло" year="2014">
+    <info amount="2" status="снимается" path="/browse.php?cat=287"/>
+    <genres>
+      <genre>Драма</genre>
+      <genre>Приключения</genre>
+      <genre>История</genre>
+    </genres>
+    <countries>
+      <country>США</country>
+    </countries>
+  </tvs>
   <tvs name="Masters of Science Fiction" locname="Мастера научной фантастики" year="2007">
     <info amount="1" status="закончен" path="/browse.php?cat=75"/>
     <genres>
@@ -1207,6 +1317,17 @@
     <genres>
       <genre>Драма</genre>
       <genre>Фантастика</genre>
+    </genres>
+    <countries>
+      <country>США</country>
+    </countries>
+  </tvs>
+  <tvs name="Dead of Summer" locname="Мертвое лето" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=285"/>
+    <genres>
+      <genre>Ужасы</genre>
+      <genre>Драма</genre>
+      <genre>Детектив</genre>
     </genres>
     <countries>
       <country>США</country>
@@ -1232,8 +1353,17 @@
       <country>США</country>
     </countries>
   </tvs>
+  <tvs name="Billions" locname="Миллиарды" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=275"/>
+    <genres>
+      <genre>Драма</genre>
+    </genres>
+    <countries>
+      <country>США</country>
+    </countries>
+  </tvs>
   <tvs name="Mr. Robot" locname="Мистер Робот" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=245"/>
+    <info amount="2" status="снимается" path="/browse.php?cat=245"/>
     <genres>
       <genre>Драма</genre>
       <genre>Криминал</genre>
@@ -1254,7 +1384,7 @@
     </countries>
   </tvs>
   <tvs name="Bates Motel" locname="Мотель Бейтса" year="2013">
-    <info amount="3" status="снимается" path="/browse.php?cat=184"/>
+    <info amount="4" status="снимается" path="/browse.php?cat=184"/>
     <genres>
       <genre>Ужасы</genre>
       <genre>Детектив</genre>
@@ -1265,7 +1395,7 @@
     </countries>
   </tvs>
   <tvs name="The Musketeers" locname="Мушкетеры" year="2014">
-    <info amount="2" status="снимается" path="/browse.php?cat=204"/>
+    <info amount="3" status="закончен" path="/browse.php?cat=204"/>
     <genres>
       <genre>Драма</genre>
     </genres>
@@ -1296,7 +1426,7 @@
     </countries>
   </tvs>
   <tvs name="Z Nation" locname="Нация Z" year="2014">
-    <info amount="2" status="снимается" path="/browse.php?cat=224"/>
+    <info amount="3" status="снимается" path="/browse.php?cat=224"/>
     <genres>
       <genre>Фантастика</genre>
       <genre>Боевик</genre>
@@ -1349,7 +1479,7 @@
     </countries>
   </tvs>
   <tvs name="The Night Manager" locname="Ночной администратор" year="2016">
-    <info amount="1" status="снимается" path="/browse.php?cat=273"/>
+    <info amount="1" status="закончен" path="/browse.php?cat=273"/>
     <genres>
       <genre>Боевик</genre>
       <genre>Триллер</genre>
@@ -1361,7 +1491,7 @@
     </countries>
   </tvs>
   <tvs name="Limitless" locname="Области тьмы" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=256"/>
+    <info amount="1" status="закончен" path="/browse.php?cat=256"/>
     <genres>
       <genre>Фантастика</genre>
       <genre>Триллер</genre>
@@ -1405,7 +1535,7 @@
     </countries>
   </tvs>
   <tvs name="Eagleheart" locname="Орлиное сердце" year="2011">
-    <info amount="3" status="снимается" path="/browse.php?cat=141"/>
+    <info amount="3" status="закончен" path="/browse.php?cat=141"/>
     <genres>
       <genre>Комедия</genre>
     </genres>
@@ -1437,7 +1567,7 @@
     </countries>
   </tvs>
   <tvs name="Peaky Blinders" locname="Острые козырьки" year="2013">
-    <info amount="2" status="снимается" path="/browse.php?cat=197"/>
+    <info amount="3" status="снимается" path="/browse.php?cat=197"/>
     <genres>
       <genre>Драма</genre>
       <genre>Криминал</genre>
@@ -1447,7 +1577,7 @@
     </countries>
   </tvs>
   <tvs name="From Dusk Till Dawn" locname="От заката до рассвета" year="2014">
-    <info amount="2" status="снимается" path="/browse.php?cat=213"/>
+    <info amount="3" status="снимается" path="/browse.php?cat=213"/>
     <genres>
       <genre>Ужасы</genre>
       <genre>Боевик</genre>
@@ -1470,7 +1600,7 @@
     </countries>
   </tvs>
   <tvs name="The Fall" locname="Падение" year="2013">
-    <info amount="2" status="снимается" path="/browse.php?cat=231"/>
+    <info amount="3" status="снимается" path="/browse.php?cat=231"/>
     <genres>
       <genre>Драма</genre>
       <genre>Триллер</genre>
@@ -1478,6 +1608,18 @@
     <countries>
       <country>США</country>
       <country>Великобритания</country>
+    </countries>
+  </tvs>
+  <tvs name="Preacher" locname="Пастырь" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=278"/>
+    <genres>
+      <genre>Фэнтези</genre>
+      <genre>Драма</genre>
+      <genre>Детектив</genre>
+      <genre>Приключения</genre>
+    </genres>
+    <countries>
+      <country>США</country>
     </countries>
   </tvs>
   <tvs name="The Originals" locname="Первородные" year="2013">
@@ -1491,7 +1633,7 @@
     </countries>
   </tvs>
   <tvs name="Transporter" locname="Перевозчик" year="2013">
-    <info amount="2" status="снимается" path="/browse.php?cat=181"/>
+    <info amount="2" status="закончен" path="/browse.php?cat=181"/>
     <genres>
       <genre>Криминальный</genre>
       <genre>Боевик</genre>
@@ -1513,6 +1655,16 @@
       <country>США</country>
     </countries>
   </tvs>
+  <tvs name="Animal Kingdom" locname="По волчьим законам" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=283"/>
+    <genres>
+      <genre>Драма</genre>
+      <genre>Криминал</genre>
+    </genres>
+    <countries>
+      <country>США</country>
+    </countries>
+  </tvs>
   <tvs name="Surface" locname="Поверхность" year="2005">
     <info amount="1" status="закончен" path="/browse.php?cat=63"/>
     <genres>
@@ -1526,7 +1678,7 @@
     </countries>
   </tvs>
   <tvs name="TURN" locname="Поворот" year="2014">
-    <info amount="2" status="снимается" path="/browse.php?cat=215"/>
+    <info amount="3" status="снимается" path="/browse.php?cat=215"/>
     <genres>
       <genre>Драма</genre>
     </genres>
@@ -1545,7 +1697,7 @@
     </countries>
   </tvs>
   <tvs name="Person of Interest" locname="Подозреваемый" year="2011">
-    <info amount="4" status="снимается" path="/browse.php?cat=159"/>
+    <info amount="5" status="закончен" path="/browse.php?cat=159"/>
     <genres>
       <genre>Драма</genre>
       <genre>Триллер</genre>
@@ -1555,7 +1707,7 @@
     </countries>
   </tvs>
   <tvs name="Hawaii Five-0" locname="Полиция Гавайев" year="2010">
-    <info amount="6" status="снимается" path="/browse.php?cat=136"/>
+    <info amount="7" status="снимается" path="/browse.php?cat=136"/>
     <genres>
       <genre>Драма</genre>
     </genres>
@@ -1563,8 +1715,19 @@
       <country>США</country>
     </countries>
   </tvs>
+  <tvs name="The Last Kingdom" locname="Последнее королевство" year="2015">
+    <info amount="1" status="снимается" path="/browse.php?cat=280"/>
+    <genres>
+      <genre>Боевик</genre>
+      <genre>Мелодрама</genre>
+      <genre>История</genre>
+    </genres>
+    <countries>
+      <country>Великобритания</country>
+    </countries>
+  </tvs>
   <tvs name="The Last Ship" locname="Последний корабль" year="2014">
-    <info amount="2" status="снимается" path="/browse.php?cat=218"/>
+    <info amount="3" status="снимается" path="/browse.php?cat=218"/>
     <genres>
       <genre>Фантастика</genre>
       <genre>Триллер</genre>
@@ -1642,6 +1805,26 @@
     <genres>
       <genre>Фэнтези</genre>
       <genre>Мелодрама</genre>
+    </genres>
+    <countries>
+      <country>США</country>
+    </countries>
+  </tvs>
+  <tvs name="The Path" locname="Путь" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=276"/>
+    <genres>
+      <genre>Драма</genre>
+    </genres>
+    <countries>
+      <country>США</country>
+    </countries>
+  </tvs>
+  <tvs name="Frequency" locname="Радиоволна" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=292"/>
+    <genres>
+      <genre>Фантастика</genre>
+      <genre>Драма</genre>
+      <genre>Детектив</genre>
     </genres>
     <countries>
       <country>США</country>
@@ -1726,8 +1909,8 @@
       <country>США</country>
     </countries>
   </tvs>
-  <tvs name="The Making of the Mob: New York" locname="Рождение мафии: Нью-Йорк" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=249"/>
+  <tvs name="The Making of the Mob" locname="Рождение мафии" year="2015">
+    <info amount="2" status="снимается" path="/browse.php?cat=249"/>
     <genres>
       <genre>Драма</genre>
       <genre>Криминальный</genre>
@@ -1738,7 +1921,7 @@
     </countries>
   </tvs>
   <tvs name="Salem" locname="Салем" year="2014">
-    <info amount="2" status="снимается" path="/browse.php?cat=209"/>
+    <info amount="3" status="снимается" path="/browse.php?cat=209"/>
     <genres>
       <genre>Фантастика</genre>
       <genre>Триллер</genre>
@@ -1758,8 +1941,8 @@
       <country>Англия</country>
     </countries>
   </tvs>
-  <tvs name="SuperNatural" locname="Сверхъестественное" year="2005">
-    <info amount="11" status="снимается" path="/browse.php?cat=65"/>
+  <tvs name="Supernatural" locname="Сверхъестественное" year="2005">
+    <info amount="12" status="снимается" path="/browse.php?cat=65"/>
     <genres>
       <genre>Драма</genre>
       <genre>Фэнтези</genre>
@@ -1823,7 +2006,7 @@
     </countries>
   </tvs>
   <tvs name="Blindspot" locname="Слепое пятно" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=258"/>
+    <info amount="2" status="снимается" path="/browse.php?cat=258"/>
     <genres>
       <genre>Триллер</genre>
       <genre>Драма</genre>
@@ -1843,6 +2026,18 @@
     <countries>
       <country>США</country>
       <country>Канада</country>
+    </countries>
+  </tvs>
+  <tvs name="Lethal Weapon" locname="Смертельное оружие" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=288"/>
+    <genres>
+      <genre>Боевик</genre>
+      <genre>Триллер</genre>
+      <genre>Драма</genre>
+      <genre>Криминал</genre>
+    </genres>
+    <countries>
+      <country>США</country>
     </countries>
   </tvs>
   <tvs name="The Event" locname="Событие" year="2010">
@@ -1865,7 +2060,7 @@
     </countries>
   </tvs>
   <tvs name="Daredevil" locname="Сорвиголова" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=241"/>
+    <info amount="2" status="снимается" path="/browse.php?cat=241"/>
     <genres>
       <genre>Боевик</genre>
       <genre>Драма</genre>
@@ -1957,7 +2152,7 @@
     </countries>
   </tvs>
   <tvs name="Arrow" locname="Стрела" year="2012">
-    <info amount="4" status="снимается" path="/browse.php?cat=176"/>
+    <info amount="5" status="снимается" path="/browse.php?cat=176"/>
     <genres>
       <genre>Драма</genre>
       <genre>Приключения</genre>
@@ -1967,8 +2162,18 @@
       <country>США</country>
     </countries>
   </tvs>
+  <tvs name="Shooter" locname="Стрелок" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=294"/>
+    <genres>
+      <genre>Боевик</genre>
+      <genre>Драма</genre>
+    </genres>
+    <countries>
+      <country>США</country>
+    </countries>
+  </tvs>
   <tvs name="Supergirl" locname="Супергёрл" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=242"/>
+    <info amount="2" status="снимается" path="/browse.php?cat=242"/>
     <genres>
       <genre>Фантастика</genre>
       <genre>Боевик</genre>
@@ -2023,7 +2228,7 @@
     </countries>
   </tvs>
   <tvs name="Dark Matter" locname="Темная материя" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=246"/>
+    <info amount="2" status="снимается" path="/browse.php?cat=246"/>
     <genres>
       <genre>Фантастика</genre>
       <genre>Триллер</genre>
@@ -2052,6 +2257,15 @@
     <countries>
       <country>США</country>
       <country>Австралия</country>
+    </countries>
+  </tvs>
+  <tvs name="Shut Eye" locname="Третий глаз" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=296"/>
+    <genres>
+      <genre>Драма</genre>
+    </genres>
+    <countries>
+      <country>США</country>
     </countries>
   </tvs>
   <tvs name="The Tudors" locname="Тюдоры" year="2007">
@@ -2098,7 +2312,7 @@
     </countries>
   </tvs>
   <tvs name="Bitten" locname="Укушенная" year="2014">
-    <info amount="3" status="снимается" path="/browse.php?cat=201"/>
+    <info amount="3" status="закончен" path="/browse.php?cat=201"/>
     <genres>
       <genre>Фэнтези</genre>
       <genre>Драма</genre>
@@ -2128,7 +2342,7 @@
     </countries>
   </tvs>
   <tvs name="Wayward Pines" locname="Уэйуорд Пайнс" year="2015">
-    <info amount="1" status="снимается" path="/browse.php?cat=240"/>
+    <info amount="2" status="снимается" path="/browse.php?cat=240"/>
     <genres>
       <genre>Триллер</genre>
       <genre>Драма</genre>
@@ -2168,7 +2382,7 @@
     </countries>
   </tvs>
   <tvs name="The Flash" locname="Флэш" year="2014">
-    <info amount="2" status="снимается" path="/browse.php?cat=226"/>
+    <info amount="3" status="снимается" path="/browse.php?cat=226"/>
     <genres>
       <genre>Фантастика</genre>
       <genre>Драма</genre>
@@ -2191,9 +2405,20 @@
     </countries>
   </tvs>
   <tvs name="The Walking Dead" locname="Ходячие мертвецы" year="2010">
-    <info amount="6" status="снимается" path="/browse.php?cat=134"/>
+    <info amount="7" status="снимается" path="/browse.php?cat=134"/>
     <genres>
       <genre>Ужасы</genre>
+    </genres>
+    <countries>
+      <country>США</country>
+    </countries>
+  </tvs>
+  <tvs name="Dirk Gently's Holistic Detective Agency" locname="Холистическое детективное агентство Дирка Джентли" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=293"/>
+    <genres>
+      <genre>Комедия</genre>
+      <genre>Фантастика</genre>
+      <genre>Детектив</genre>
     </genres>
     <countries>
       <country>США</country>
@@ -2210,7 +2435,7 @@
     </countries>
   </tvs>
   <tvs name="The Frankenstein Chronicles" locname="Хроники Франкенштейна" year="2015">
-    <info amount="1" status="закончен" path="/browse.php?cat=262"/>
+    <info amount="1" status="снимается" path="/browse.php?cat=262"/>
     <genres>
       <genre>Драма</genre>
       <genre>Криминал</genre>
@@ -2272,7 +2497,7 @@
     </countries>
   </tvs>
   <tvs name="The Blacklist" locname="Черный список" year="2013">
-    <info amount="3" status="снимается" path="/browse.php?cat=214"/>
+    <info amount="4" status="снимается" path="/browse.php?cat=214"/>
     <genres>
       <genre>Криминальный</genre>
       <genre>Боевик</genre>
@@ -2290,6 +2515,15 @@
     </genres>
     <countries>
       <country>Канада</country>
+      <country>США</country>
+    </countries>
+  </tvs>
+  <tvs name="Outsiders" locname="Чужаки" year="2016">
+    <info amount="1" status="снимается" path="/browse.php?cat=277"/>
+    <genres>
+      <genre>Драма</genre>
+    </genres>
+    <countries>
       <country>США</country>
     </countries>
   </tvs>
@@ -2324,7 +2558,7 @@
     </countries>
   </tvs>
   <tvs name="The Strain" locname="Штамм" year="2014">
-    <info amount="2" status="снимается" path="/browse.php?cat=220"/>
+    <info amount="3" status="снимается" path="/browse.php?cat=220"/>
     <genres>
       <genre>Ужасы</genre>
       <genre>Фантастика</genre>
@@ -2355,7 +2589,7 @@
     </countries>
   </tvs>
   <tvs name="Elementary" locname="Элементарно" year="2012">
-    <info amount="4" status="снимается" path="/browse.php?cat=174"/>
+    <info amount="5" status="снимается" path="/browse.php?cat=174"/>
     <genres>
       <genre>Драма</genre>
       <genre>Детектив</genre>
