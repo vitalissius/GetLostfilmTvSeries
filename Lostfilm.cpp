@@ -1,426 +1,424 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <list>
-#include <memory>
-#include <regex>
-#include <tuple>
-#include <set>
-#include <functional>
+#include <chrono>
 #include <codecvt>
+#include <fstream>
+#include <functional>
+#include <list>
+#include <iostream>
+#include <memory>
+#include <vector>
+#include <regex>
+#include <set>
+#include <string>
+#include <tuple>
 
 #include <boost/asio.hpp>
 
 #ifdef _MSC_VER
-  std::locale locR("rus_rus.1251");       // ukr_ukr.1251
+  std::locale locr("rus_rus.1251");       // ukr_ukr.1251
 #else
-  std::locale locR("ru_RU");              // uk_UA
-#endif // !_MSC_VER
-
-std::locale locRUtf8 = std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>());
-
-std::shared_ptr<std::stringstream> downloadFunction(const std::string& host, const std::string& pathWithQuery)
-{
-  try
-  {
-    boost::asio::io_service inputOutputService;
-
-    // Get a list of endpoints corresponding to the server name:
-    boost::asio::ip::tcp::resolver ipResolver(inputOutputService);
-    boost::asio::ip::tcp::resolver::query queryTo(host, "http");
-    boost::asio::ip::tcp::resolver::iterator endpointIter = ipResolver.resolve(queryTo);
-    boost::asio::ip::tcp::resolver::iterator endIter;
-
-    // Try each endpoint until we successfully establish a connection.
-    boost::asio::ip::tcp::socket socketToInputOutput(inputOutputService);
-    boost::system::error_code errorCode = boost::asio::error::host_not_found;
-    while (errorCode && endpointIter != endIter)
-    {
-      socketToInputOutput.close();
-      socketToInputOutput.connect(*endpointIter++, errorCode);
-    }
-    if (errorCode)
-    {
-      throw boost::system::system_error(errorCode);
-    }
-
-    // From the request. We specify the "Connection: close" header so that the server will close the socket after transmitting the response.
-    // This will allow us to treat all data up until the EOF as the content.
-    boost::asio::streambuf requestLine;
-    std::ostream requestOutputStream(&requestLine);
-    requestOutputStream << "GET " << pathWithQuery << " HTTP/1.0\r\n";
-    requestOutputStream << "Host: " << host << "\r\n";
-    requestOutputStream << "Accept: */*\r\n";
-    requestOutputStream << "Connection: close\r\n\r\n";
-
-    // Send a request:
-    boost::asio::write(socketToInputOutput, requestLine);
-
-    // Read the response status line:
-    boost::asio::streambuf responseLine;
-    boost::asio::read_until(socketToInputOutput, responseLine, "\r\n");
-
-    // Check that response is OK:
-    std::istream responseInputStream(&responseLine);
-    std::string httpVersion;
-    responseInputStream >> httpVersion;
-    unsigned int statusCode;
-    responseInputStream >> statusCode;
-    std::string statusMessage;
-    std::getline(responseInputStream, statusMessage);
-    if (!responseInputStream || httpVersion.substr(0, 5) != "HTTP/")
-    {
-      std::cout << "Invalid response!\n";
-      return nullptr;
-    }
-    if (statusCode != 200)
-    {
-      std::cout << "Response returned with status code: " << statusCode << "\n";
-      return nullptr;
-    }
-
-    // Read the response headers, which are terminated by a blank line^
-    boost::asio::read_until(socketToInputOutput, responseLine, "\r\n\r\n");
-
-    // Process the response headers:
-    std::string headerString;
-    while (std::getline(responseInputStream, headerString) && headerString != "\r");  // <-- Ignore header
-
-
-    std::stringstream xmlDoc;
-    // Write whatever content we already have to output:
-    if (responseLine.size() > 0)
-    {
-      xmlDoc << &responseLine;
-    }
-    // Read until EOF, writing data to output as we go:
-    while (boost::asio::read(socketToInputOutput, responseLine, boost::asio::transfer_at_least(1), errorCode))
-    {
-      xmlDoc << &responseLine;
-    }
-    if (errorCode != boost::asio::error::eof)
-    {
-      throw boost::system::system_error(errorCode);
-    }
-
-    std::shared_ptr<std::stringstream> returnedStringStream = std::make_shared<std::stringstream>();
-    returnedStringStream->swap(xmlDoc);
-
-    returnedStringStream->imbue(locR);
-    std::function<std::shared_ptr<std::stringstream>(std::shared_ptr<std::stringstream>)> cp1251ToUtf8 = [](std::shared_ptr<std::stringstream> ss)
-    {
-      std::string narrowStr = ss->str();
-      std::wstring wideStr(narrowStr.length(), 0);
-      std::use_facet<std::ctype<wchar_t>>(std::locale(locR)).widen(&narrowStr[0], &narrowStr[0] + narrowStr.length(), &wideStr[0]);
-      std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> cv;
-      std::string strUtf8 = cv.to_bytes(wideStr);
-      std::stringstream ssUtf8;
-      ssUtf8.imbue(locRUtf8);
-      ssUtf8 << strUtf8;
-      std::shared_ptr<std::stringstream> pSsUtf8 = std::make_shared<std::stringstream>();
-      pSsUtf8->swap(ssUtf8);
-      return pSsUtf8;
-    };
-    return cp1251ToUtf8(returnedStringStream);
-  }
-  catch (std::exception& e)
-  {
-    std::cout << e.what() << std::endl;
-  }
-}
+  std::locale locr("ru_RU");              // uk_UA
+#endif  // !_MSC_VER
 
 
 
-struct Row
-{
-  std::string _path;
-  std::string _engName;
-  std::string _locName;
-  std::string _country;
-  std::string _releaseYear;
-  std::string _genre;
-  std::string _seasonsAmount;
-  std::string _status;
+struct Information;
 
-  Row::Row(const std::string& path,
-           const std::string& locName,
-           const std::string& engName,
-           const std::string& country,
-           const std::string& releaseYear,
-           const std::string& genre,
-           const std::string& seasonsAmount,
-           const std::string& status) 
-           :
-           _path(path),
-           _locName(locName),
-           _engName(engName),           
-           _country(country),
-           _releaseYear(releaseYear),
-           _genre(genre),
-           _seasonsAmount(seasonsAmount),
-           _status(status)
-  {}
+struct Serial;
 
-  friend std::ostream& operator<<(std::ostream& o, const Row& r)
-  {
-    o << "path: " << r._path
-      << "\nloc: " << r._locName
-      << "\neng: " << r._engName
-      << "\ncountry: " << r._country
-      << "\nyear: " << r._releaseYear
-      << "\ngenre: " << r._genre
-      << "\namount: " << r._seasonsAmount
-      << "\nstatus: " << r._status
-      << "\n";
-    return o;
-  }
-};
+template<typename Str1, typename Str2>
+std::vector<Information> downloadInformation(Str1 host, Str2 path);
 
-std::unique_ptr<std::vector<std::string>> tokenizeString(const std::string& str, bool toUpperFirstLetter = false)
-{
-  std::unique_ptr<std::vector<std::string>> pvs = std::make_unique<std::vector<std::string>>();
+template<typename Str>
+std::vector<Serial> downloadSerials(Str host, std::vector<Information> data);
 
-  char* cstr = new char[str.size() + 1];
-  strcpy_s(cstr, str.size() + 1, str.data());
-  char* token = nullptr;
-  char* next_token = nullptr;
-  char seps[] = " ,/.";
-  token = strtok_s(cstr, seps, &next_token);
-  while (token != nullptr)
-  {
-    if (token != nullptr)
-    {
-      if (toUpperFirstLetter)
-      {
-        static std::locale loc("");
-        std::use_facet<std::ctype<char>>(loc).toupper(token, token + 1);
-        pvs->push_back(token);
-      }
-      else
-      {
-        pvs->push_back(token);
-      }
-      token = strtok_s(nullptr, seps, &next_token);
-    }
-  }
-  delete[] cstr;
+template<typename Str>
+void makeXmlGenres(Str filename, const std::set<std::string>& genres, bool is_to_utf8=false);
 
-  return pvs;
-}
+template<typename Str>
+void makeXmlCountries(Str filename, const std::set<std::string>& countries, bool is_to_utf8=false);
 
-std::string& replAndTrim(std::string& str) // Trim string in front (if necessary), and adding 'amp;' after '&' (if necessary);
-{
-  static std::locale loc("");
-  while (std::isspace(str.front(), loc)) str.erase(str.begin());
+template<typename Str>
+void makeXmlFullData(Str filename, const std::vector<Serial>& serials, bool is_to_utf8=false);
 
-  std::string::size_type pos = str.find("&");
-  while (pos != std::string::npos)
-  {
-    str.insert(pos + 1, "amp;");
-    pos = str.find("&", pos + 4);
-  }
-  return str;
-}
+std::set<std::string> reorganizeGenres(const std::vector<Serial>& disorganized);
 
-struct GenresAndCountries {
-  std::set<std::string> _genres;
-  std::set<std::string> _countries;
-};
+std::set<std::string> reorganizeCountries(std::vector<Serial>& disorganized);
 
-void makeXmlFullData(const std::list<Row>& listRows, const std::shared_ptr<GenresAndCountries> gacIfNecessary = nullptr)
-{
-  std::ofstream out("tvseries.xml", std::ios::out | std::ios::trunc);
-  if (out.is_open())
-  {
-    out << "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n\n";
-    out << "<tvseries>\n";
-    for (auto lr : listRows)
-    {
-      out << "\t<tvs name=\"" << replAndTrim(lr._engName) << "\" locname=\"" << lr._locName << "\" year=\"" << lr._releaseYear << "\">\n";
-      out << "\t\t<info amount=\"" << lr._seasonsAmount << "\" status=\"" << lr._status << "\" path=\"" << lr._path << "\" />\n";
-      
-      out << "\t\t<genres>\n";
-      std::unique_ptr<std::vector<std::string>> pvs = tokenizeString(lr._genre, true);
-      for (auto s : *pvs)
-      {
-        if (gacIfNecessary) gacIfNecessary->_genres.insert(s);
-        out << "\t\t\t<genre>" << s << "</genre>\n";
-      }
-      out << "\t\t</genres>\n";
-
-      out << "\t\t<countries>\n";
-      pvs = tokenizeString(lr._country);
-      for (auto s : *pvs)
-      {
-        if (gacIfNecessary) gacIfNecessary->_countries.insert(s);
-        out << "\t\t\t<country>" << s << "</country>\n";
-      }
-      out << "\t\t</countries>\n";
-
-      out << "\t</tvs>\n";
-    }
-    out << "</tvseries>\n";
-    out.close();
-  }
-}
-
-void makeXmlGenresAndCountries(const std::shared_ptr<GenresAndCountries> gac)
-{
-  std::ofstream out("genres.xml");
-  if (out.is_open())
-  {
-    out << "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n\n";
-    out << "<genres>";
-    out << "\n";
-
-    for (auto s : gac->_genres)
-    {
-      out << "\t<genre>" << s << "</genre>\n";
-    }
-
-    out << "</genres>";
-    out << "\n";
-    out.close();
-  }
-
-  out.open("countries.xml");
-  if (out.is_open())
-  {
-    out << "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n\n";
-    out << "<countries>";
-    out << "\n";
-
-    for (auto s : gac->_countries)
-    {
-      out << "\t<country>" << s << "</country>\n";
-    }
-
-    out << "</countries>";
-    out << "\n";
-    out.close();
-  }
-}
 
 int main()
 {
-  setlocale(0, ".1251");
-//   std::cin.get();
-//   std::cin.clear();
+    std::locale::global(locr);
 
-  try
-  {
-    std::shared_ptr<std::stringstream> streamFullList = downloadFunction("www.lostfilm.tv", "/serials.php");    
-    streamFullList->imbue(locRUtf8);
-
-    std::list<std::tuple<std::string, std::string, std::string>> listTupleBegin;
-    std::list<Row> listRowAll;
+    std::string host = "www.lostfilm.tv";
+    std::string path = "/serials.php";
     
-    while (!streamFullList->eof())
+
+    auto data = downloadInformation(host, path);
+    std::cout << data.size() << " elements\n";
+    
+    auto serials = downloadSerials(host, std::move(data));
+    
+    auto genres = reorganizeGenres(serials);
+    makeXmlGenres("genres.xml", genres);
+
+    auto countries = reorganizeCountries(serials);
+    makeXmlCountries("countries.xml", countries);
+
+    makeXmlFullData("tvseries.xml", serials);
+
+    std::copy(serials.begin(), serials.end(), std::ostream_iterator<Serial>(std::cout, "\n"));
+
+    return 0;
+}
+
+
+
+struct Information {
+    std::string _path;
+    std::string _loc_name;
+    std::string _orig_name;
+
+    Information(std::string url, std::string loc_name, std::string orig_name)
+        : _path(std::move(url))
+        , _loc_name(std::move(loc_name))
+        , _orig_name(std::move(orig_name))
+    {}
+};
+
+struct Serial {
+    std::string _path;
+    std::string _loc_name;
+    std::string _orig_name;
+    std::string _country;
+    std::string _release_year;
+    std::string _genre;
+    std::string _seasons_amount;
+    std::string _status;
+
+public:
+    Serial(const std::string& path,
+        const std::string& loc_name,
+        const std::string& orig_name,
+        const std::string& country,
+        const std::string& release_year,
+        const std::string& genre,
+        const std::string& seasons_amount,
+        const std::string& status)
+        : _path(std::move(path))
+        , _loc_name(std::move(loc_name))
+        , _orig_name(std::move(orig_name))
+        , _country(std::move(country))
+        , _release_year(std::move(release_year))
+        , _genre(std::move(genre))
+        , _seasons_amount(std::move(seasons_amount))
+        , _status(std::move(status))
+    {}
+
+    friend std::ostream& operator<<(std::ostream& out, const Serial& serial)
     {
+        out << "\nPath:           " << serial._path
+            << "\nLocale name:    " << serial._loc_name
+            << "\nOriginal name:  " << serial._orig_name
+            << "\nCountry:        " << serial._country
+            << "\nRelease year:   " << serial._release_year
+            << "\nGenre:          " << serial._genre
+            << "\nSeasons amount: " << serial._seasons_amount
+            << "\nStatus:         " << serial._status;
+        return out;
+    }
+};
 
-      std::string line;
-      std::getline(*streamFullList, line);
 
-      static bool found = false;
-      if (!found && (line.find("<!-- ### Полный список сериалов -->") != std::string::npos)) found = true;
-      if (found)
-      {
-        if (line.find("<!-- ### Текстовая информация -->") != std::string::npos) break;
-        std::smatch sm;
 
-        std::string path;
-        std::string rus;
-        std::string eng;
+std::string& trim(std::string& str)
+{
+    if (!str.empty())
+    {
+        std::size_t pos = 0;
+        while (std::isspace(*(str.begin() + pos), locr)) { ++pos; }
+        if (pos != 0) { str.erase(0, pos); }
 
-        if (std::regex_search(line, sm, std::regex("(/browse.php\\?cat=\\d\\d\?\\d)")))
+        std::size_t rpos = 0;
+        while (std::isspace(*(str.rbegin() + rpos), locr)) { ++rpos; }
+        if (rpos != 0) { str.erase(str.size() - rpos, str.size()); }
+    }
+    return str;
+}
+
+std::vector<std::string> tokenize(std::string str, const char* seps, const bool is_to_upeer = false)
+{
+    std::vector<std::string> vs;
+
+    for (const auto& e : std::string(seps))
+    {
+        std::replace_if(str.begin(), str.end(), [e](const char c) { return c == e; }, '\n');
+    }
+    std::stringstream ss;
+    ss << str;
+    std::string tmp;
+    while (std::getline(ss, tmp))
+    {
+        tmp = trim(tmp);
+        if (is_to_upeer)    // is to uppercase the first letter
         {
-          path = sm[1];
-          line = sm.suffix();
+            std::use_facet<std::ctype<char>>(locr).toupper(&tmp[0], &tmp[0] + 1);
+        }
+        vs.emplace_back(std::move(tmp));
+    }
+    return vs;
+}
 
-          if (std::regex_search(line, sm, std::regex(">(.*)<br>")))
-          {
-            rus = sm[1];
-            line = sm.suffix();
+std::string cp1251ToUtf8(const std::string& str)
+{
+    std::wstring wstr(str.length(), 0);
+    std::use_facet<std::ctype<wchar_t>>(std::locale(locr)).widen(&str[0], &str[0] + str.length(), &wstr[0]);
+    const std::string ustr = std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>().to_bytes(wstr);
+    return ustr;
+};
 
-            if (std::regex_search(line, sm, std::regex(">\\((.*)\\)</span>")))
+std::string converter(const std::string& data, bool is_to_utf8 = false)
+{
+    if (is_to_utf8) { return cp1251ToUtf8(data); }
+    else { return data; }
+}
+
+
+
+template<typename Str1, typename Str2>
+std::stringstream downloadPage(Str1 host, Str2 path)
+{
+    boost::asio::ip::tcp::iostream ios;
+    ios.expires_from_now(boost::posix_time::seconds(5));
+    ios.connect(host, "http");
+    if (!ios)
+    {
+        throw std::exception(ios.error().message().data());
+    }
+
+    ios << "GET " << path << " HTTP/1.0\r\n";
+    ios << "Host: " << host << "\r\n";
+    ios << "Accept: */*\r\n";
+    ios << "Connection: close\r\n\r\n";
+
+    std::string header;
+    while (std::getline(ios, header) && header != "\r") {}
+
+    std::stringstream page;
+    page << ios.rdbuf();
+    return page;
+}
+
+template<typename Str1, typename Str2>
+std::vector<Information> downloadInformation(Str1 host, Str2 path)
+{
+    std::stringstream ss = downloadPage(host, path);
+
+    std::string buf;
+    std::string start_marker = "<!-- ### Полный список сериалов -->";
+    while (std::getline(ss, buf) && (buf.find(start_marker) == std::string::npos))
+    {
+    }
+
+    std::vector<Information> data;
+
+    std::string end_marker = "<br />";
+    while (std::getline(ss, buf) && (buf.find(end_marker) == std::string::npos))
+    {
+        std::smatch match;
+        std::regex expr(R"_(<a href="(.*)" class="bb_a">(.*)<br><span>\((.*)\)</span></a>)_");
+        if (std::regex_search(buf, match, expr))
+        {
+            data.emplace_back(std::move(match[1]), std::move(match[2]), std::move(match[3]));
+        }
+    }
+    return data;
+}
+
+template<typename Str>
+std::vector<Serial> downloadSerials(Str host, std::vector<Information> data)
+{
+    std::vector<Serial> serials;
+    std::size_t index = 0;
+
+    std::regex expr_country(R"_(Страна: (.+)<br />)_");
+    std::regex expr_releaseyear(R"_(Год выхода: <span>(.+)</span><br />)_");
+    std::regex expr_genre(R"_(Жанр: <span>(.+)</span><br />)_");
+    std::regex expr_seasons_amount(R"_(Количество сезонов: <span>(.+)</span><br />)_");
+    std::regex expr_status(R"_(Статус: (.+)<br />)_");
+
+    for (const auto& e : data)
+    {
+        std::cout << "<" << index++ << "> Receiving information about " << e._loc_name << ".\n";
+
+        const std::stringstream ss = downloadPage(host, e._path);
+
+        const std::string page = ss.str();
+
+        const std::string start_marker = "<h1>" + e._loc_name + " " + "(" + e._orig_name + ")" + "</h1><br />";
+        static const std::string end_marker = R"_(<div class="content">)_";
+
+        const auto start_pos = page.find(start_marker);
+        const auto end_pos = page.find(end_marker, start_pos);
+
+        const std::string block(page.begin() + start_pos, page.begin() + end_pos);
+
+        // lambda
+        static const auto _search = [](const std::string& s, const std::regex& r) -> std::string {
+            std::smatch m;
+            if (std::regex_search(s, m, r))
             {
-              eng = sm[1];
+                return m[1];
             }
-          }
-          listTupleBegin.push_back(std::make_tuple(path, rus, eng));
-        }
-      }
+            return{ "" };
+        };
+
+        serials.emplace_back(
+            std::move(e._path),
+            std::move(e._loc_name),
+            std::move(e._orig_name),
+            _search(block, expr_country),
+            _search(block, expr_releaseyear),
+            _search(block, expr_genre),
+            _search(block, expr_seasons_amount),
+            _search(block, expr_status)
+        );
     }
-    std::cout << "Given a " << listTupleBegin.size() << " URL's" << std::endl;
-
-//     for (auto l : listTupleBegin)
-//     {
-//       std::cout << "url: " << std::get<0>(l) << ", loc: " << std::get<1>(l) << ", eng: " << std::get<2>(l) << std::endl;
-//     }
+    return serials;
+}
 
 
-    for (auto tuple : listTupleBegin)
+
+std::string xmlDeclaration(bool is_to_utf8=false)
+{
+    static const std::string charset_cp1251 = "windows-1251";
+    static const std::string charset_utf8 = "utf-8";
+
+    std::string head;
+    head += "<?xml version=\"1.0\" encoding=\"";
+    if (is_to_utf8) { head += charset_utf8; }
+    else { head += charset_cp1251; }
+    head += "\"?>\n\n";
+
+    return head;
+}
+
+template<typename Str>
+void makeXmlGenres(Str filename, const std::set<std::string>& genres, bool is_to_utf8)
+{
+    std::ofstream fout(filename);
+    if (fout.is_open())
     {
-      std::shared_ptr<std::stringstream> stream = downloadFunction("www.lostfilm.tv", std::get<0>(tuple));
+        fout << xmlDeclaration(is_to_utf8);
+        fout << "<genres>";
+        fout << "\n";
 
-      while (!stream->eof())
-      {
-        std::string line;
-        std::getline(*stream, line);
-        
-        std::string country;
-        std::string year;
-        std::string genre;
-        std::string amount;
-        std::string status;
-        
-        if (line.find("Страна:") != std::string::npos)
+        for (const auto& e : genres) 
         {
-          std::smatch sm;
-          std::regex_search(line, sm, std::regex("Страна: (.*)<br />"));
-          country = sm[1];
-          
-          std::getline(*stream, line);
-          std::regex_search(line, sm, std::regex("Год выхода: <span>(.*)</span><br />"));
-          year = sm[1];
-          
-          std::getline(*stream, line);
-          std::regex_search(line, sm, std::regex("Жанр: <span>(.*)</span><br />"));
-          genre = sm[1];
-
-          std::getline(*stream, line);
-          std::regex_search(line, sm, std::regex("Количество сезонов: <span>(.*)</span><br />"));
-          amount = sm[1];
-
-          std::getline(*stream, line);
-          std::regex_search(line, sm, std::regex("Статус: (.*)<br />"));
-          status = sm[1];
-
-          listRowAll.emplace_back(std::get<0>(tuple), std::get<1>(tuple), std::get<2>(tuple), country, year, genre, amount, status);
+            fout << "  <genre>";
+            if (is_to_utf8) { fout << cp1251ToUtf8(e); }
+            else { fout << e; }
+            fout << "</genre>\n";
         }
-        continue;
-      }
-      std::cout << "Given an info about " << std::get<2>(tuple) << std::endl;
+
+        fout << "</genres>";
+        fout << "\n";
     }
+}
 
-
-    for (auto r : listRowAll)
+template<typename Str>
+void makeXmlCountries(Str filename, const std::set<std::string>& countries, bool is_to_utf8)
+{
+    std::ofstream fout(filename);
+    if (fout.is_open())
     {
-      std::cout << r << std::endl;
+        fout << xmlDeclaration(is_to_utf8);
+        fout << "<countries>";
+        fout << "\n";
+
+        for (const auto& e : countries)
+        {
+            fout << "  <country>";
+            if (is_to_utf8) { fout << cp1251ToUtf8(e); }
+            else { fout << e; }
+            fout << "</country>\n";
+        }
+
+        fout << "</countries>";
+        fout << "\n";
     }
+}
 
-    std::shared_ptr<GenresAndCountries> gac = std::make_shared<GenresAndCountries>();
-    makeXmlFullData(listRowAll, gac);
-    makeXmlGenresAndCountries(gac);
+template<typename Str>
+void makeXmlFullData(Str filename, const std::vector<Serial>& serials, bool is_to_utf8)
+{
+    std::ofstream fout(filename);
+    if (fout.is_open())
+    {
+        fout << xmlDeclaration(is_to_utf8);
+        fout << "<tvseries>\n";
+        for (const auto& e : serials)
+        {
+            fout << "  <tvs name=\"";
+            fout << converter(e._orig_name, is_to_utf8);
+            fout << "\" locname=\"";
+            fout << converter(e._loc_name, is_to_utf8);
+            fout << "\" year=\"";
+            fout << e._release_year;
+            fout << "\">\n";
+            fout << "    <info amount=\"";
+            fout << e._seasons_amount;
+            fout << "\" status=\"";
+            fout << converter(e._status, is_to_utf8);
+            fout << "\" path=\"" << e._path;
+            fout << "\"/>\n";
 
-  }
-  catch (const std::exception e)
-  {
-    std::cout << e.what() << std::endl;
-  }
-  
-  std::cout << "\n\nPush 'Enter' to exit...";
-  std::cin.get();
-  return 0;
+            fout << "    <genres>\n";
+            for (const auto genres : tokenize(e._genre, ",./", true))
+            {
+                fout << "      <genre>";
+                fout << converter(genres, is_to_utf8);
+                fout << "</genre>\n";
+            }
+            fout << "    </genres>\n";
+
+            fout << "    <countries>\n";
+            for (const auto countries : tokenize(e._country, ",./", true))
+            {
+                fout << "      <country>";
+                fout << converter(countries, is_to_utf8);
+                fout << "</country>\n";
+            }
+            fout << "    </countries>\n";
+            fout << "  </tvs>\n";
+        }
+        fout << "</tvseries>\n";
+    }
+}
+
+
+
+enum class Member {
+    Genre,
+    Country
+};
+
+std::set<std::string> reorganize(const std::vector<Serial>& disorganized, Member mem)
+{
+    std::set<std::string> organized;
+    for (const auto& e : disorganized)
+    {
+        const auto v = tokenize(mem == Member::Genre ? e._genre : e._country, ".,/", true);
+        organized.insert(v.begin(), v.end());
+    }
+    return organized;
+}
+
+std::set<std::string> reorganizeGenres(const std::vector<Serial>& disorganized)
+{
+    return reorganize(disorganized, Member::Genre);
+}
+
+std::set<std::string> reorganizeCountries(std::vector<Serial>& disorganized)
+{
+    return reorganize(disorganized, Member::Country);
 }
