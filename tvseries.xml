@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <tvseries>
   <tvs name="11.22.63" locname="11.22.63" year="2016">
@@ -380,7 +380,7 @@
     <countries>
     </countries>
   </tvs>
-  <tvs name="War &amp; Peace" locname="Война и мир" year="2016">
+  <tvs name="War & Peace" locname="Война и мир" year="2016">
     <info amount="1" status="закончен" path="/browse.php?cat=274"/>
     <genres>
       <genre>Драма</genre>
@@ -567,7 +567,7 @@
       <country>США</country>
     </countries>
   </tvs>
-  <tvs name="Jonathan Strange &amp; Mr Norrell" locname="Джонатан Стрендж и мистер Норрелл" year="2015">
+  <tvs name="Jonathan Strange & Mr Norrell" locname="Джонатан Стрендж и мистер Норрелл" year="2015">
     <info amount="1" status="закончен" path="/browse.php?cat=250"/>
     <genres>
       <genre>Фэнтези</genre>
